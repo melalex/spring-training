@@ -144,3 +144,4 @@ $RECYCLE.BIN/
 /src/main/ws/
 /src/main/jaxb/
 /.idea/
+/target/

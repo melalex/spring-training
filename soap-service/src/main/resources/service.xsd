@@ -1,0 +1,7 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://ua/room414/service" elementFormDefault="qualified">
+
+    <xs:import namespace="http://ua/room414/event" schemaLocation="service-event.xsd"/>
+    <xs:import namespace="http://ua/room414/user" schemaLocation="service-user.xsd"/>
+
+</xs:schema>

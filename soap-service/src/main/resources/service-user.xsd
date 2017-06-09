@@ -1,0 +1,88 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:dt="http://ua/room414/dto"
+           xmlns:re="http://ua/room414/response"
+           xmlns:us="http://ua/room414/user"
+           targetNamespace="http://ua/room414/user" elementFormDefault="qualified">
+
+    <xs:import namespace="http://ua/room414/dto" schemaLocation="service-dto.xsd"/>
+    <xs:import namespace="http://ua/room414/response" schemaLocation="service-response.xsd"/>
+
+    <xs:element name="saveUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:userDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="saveUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:userDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:userDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="re:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getByIdUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getByIdUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="dt:userDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="us:userList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUserByEmailRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUserByEmailResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="dt:userDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="userList">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="user" nillable="true" type="dt:userDto"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

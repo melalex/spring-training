@@ -1,0 +1,88 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:dt="http://ua/room414/dto"
+           xmlns:re="http://ua/room414/response"
+           xmlns:ev="http://ua/room414/event"
+           targetNamespace="http://ua/room414/event" elementFormDefault="qualified">
+
+    <xs:import namespace="http://ua/room414/dto" schemaLocation="service-dto.xsd"/>
+    <xs:import namespace="http://ua/room414/response" schemaLocation="service-response.xsd"/>
+
+    <xs:element name="saveEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:eventDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="saveEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:eventDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="object" type="dt:eventDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="re:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getByIdEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getByIdEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="dt:eventDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="ev:eventList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEventByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEventByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="dt:eventDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="eventList">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="event" nillable="true" type="dt:eventDto"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

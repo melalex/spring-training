@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://ua/room414/dto"
+           version="1.0"
+           targetNamespace="http://ua/room414/dto">
+
+    <xs:element name="auditoriumDto" type="auditoriumDto"/>
+
+    <xs:element name="entry" type="xmlMapEntry"/>
+
+    <xs:element name="eventDto" type="eventDto"/>
+
+    <xs:element name="map" type="xmlMapWrapper"/>
+
+    <xs:element name="ticketDto" type="ticketDto"/>
+
+    <xs:element name="userDto" type="userDto"/>
+
+    <xs:complexType name="auditoriumDto">
+        <xs:annotation>
+            <xs:documentation><![CDATA[(author): Alexander Melashchenko
+(version): 1.0 01 Jun 2017]]></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element name="numberOfSeats" type="xs:long"/>
+            <xs:element minOccurs="0" name="vipSeats">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="seat" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="eventDto">
+        <xs:annotation>
+            <xs:documentation><![CDATA[(author): Alexander Melashchenko
+(version): 1.0 01 Jun 2017]]></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="airDates" type="xmlSetWrapper"/>
+            <xs:element minOccurs="0" name="auditoriumDtos" type="xmlMapWrapper"/>
+            <xs:element name="basePrice" type="xs:double"/>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element name="rating" type="eventDtoRating"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="xmlSetWrapper">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="content" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="xmlMapWrapper">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="content" nillable="true" type="xmlMapEntry"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="xmlMapEntry">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="key" type="xs:string"/>
+            <xs:element minOccurs="0" name="value" type="auditoriumDto"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ticketDto">
+        <xs:annotation>
+            <xs:documentation><![CDATA[(author): Alexander Melashchenko
+(version): 1.0 01 Jun 2017]]></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+            <xs:element minOccurs="0" ref="eventDto"/>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="seat" type="xs:long"/>
+            <xs:element minOccurs="0" ref="userDto"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="userDto">
+        <xs:annotation>
+            <xs:documentation><![CDATA[(author): Alexander Melashchenko
+(version): 1.0 01 Jun 2017]]></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+            <xs:element minOccurs="0" name="ticketDtos">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ticketDto"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="eventDtoRating">
+        <xs:annotation>
+            <xs:documentation><![CDATA[(author): Alexander Melashchenko
+(version): 1.0 01 Jun 2017]]></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MID"/>
+            <xs:enumeration value="HIGH"/>
+            <xs:enumeration value="LOW"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

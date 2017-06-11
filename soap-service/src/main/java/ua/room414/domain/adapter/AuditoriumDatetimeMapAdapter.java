@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
  * @author Alexander Melashchenko
  * @version 1.0 02 Jun 2017
  */
-@Component
 public class AuditoriumDatetimeMapAdapter extends XmlAdapter<XmlMapWrapper, Map<LocalDateTime, Auditorium>> {
 
     @Override

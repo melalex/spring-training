@@ -1,5 +1,7 @@
 package ua.room414.facade.mapping;
 
+import com.github.jmnarloch.spring.boot.modelmapper.PropertyMapConfigurerSupport;
+import org.modelmapper.Converter;
 import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 import ua.room414.domain.entity.Auditorium;
@@ -12,11 +14,19 @@ import java.util.Set;
  * @version 1.0 08 Jun 2017
  */
 @Component
-public class AuditoriumPropertyMap extends PropertyMap<Auditorium, AuditoriumDto> {
+public class AuditoriumPropertyMap extends PropertyMapConfigurerSupport<Auditorium, AuditoriumDto> {
 
     @Override
-    protected void configure() {
-        map().setVipSeats(mapVipSeats(source.getVipSeats()));
+    public PropertyMap<Auditorium, AuditoriumDto> mapping() {
+        final Converter<Set<Long>, AuditoriumDto.VipSeats> vipSeatsConverter =
+                ctx -> mapVipSeats(ctx.getSource());
+
+        return new PropertyMap<Auditorium, AuditoriumDto>() {
+            @Override
+            protected void configure() {
+                using(vipSeatsConverter).map(source.getVipSeats(), destination.getVipSeats());
+            }
+        };
     }
 
     private AuditoriumDto.VipSeats mapVipSeats(Set<Long> vipSeats) {

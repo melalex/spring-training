@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
  * @author Alexander Melashchenko
  * @version 1.0 02 Jun 2017
  */
-@Component
 public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
 
     @Override

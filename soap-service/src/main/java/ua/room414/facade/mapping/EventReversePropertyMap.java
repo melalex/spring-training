@@ -1,6 +1,8 @@
 package ua.room414.facade.mapping;
 
+import com.github.jmnarloch.spring.boot.modelmapper.PropertyMapConfigurerSupport;
 import com.google.common.collect.Sets;
+import org.modelmapper.Converter;
 import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 import ua.room414.domain.entity.Event;
@@ -18,12 +20,23 @@ import java.util.stream.Collectors;
  * @version 1.0 08 Jun 2017
  */
 @Component
-public class EventReversePropertyMap extends PropertyMap<EventDto, Event> {
+public class EventReversePropertyMap extends PropertyMapConfigurerSupport<EventDto, Event> {
 
     @Override
-    protected void configure() {
-        map().setAirDates(mapAirDates(source.getAirDates()));
-        map().setRating(mapRating(source.getRating()));
+    public PropertyMap<EventDto, Event> mapping() {
+        final Converter<XmlSetWrapper, Set<LocalDateTime>> mapAirDates =
+                ctx -> mapAirDates(ctx.getSource());
+
+        final Converter<EventDtoRating, EventRating> mapRating =
+                ctx -> mapRating(ctx.getSource());
+
+        return new PropertyMap<EventDto, Event>() {
+            @Override
+            protected void configure() {
+                using(mapAirDates).map(source.getAirDates(), destination.getAirDates());
+                using(mapRating).map(source.getRating(), destination.getRating());
+            }
+        };
     }
 
     private EventRating mapRating(EventDtoRating rating) {

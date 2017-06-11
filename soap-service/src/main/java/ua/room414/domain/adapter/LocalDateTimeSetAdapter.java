@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
  * @author Alexander Melashchenko
  * @version 1.0 03 Jun 2017
  */
-@Component
 public class LocalDateTimeSetAdapter extends XmlAdapter<XmlSetWrapper, Set<LocalDateTime>> {
     @Override
     public Set<LocalDateTime> unmarshal(XmlSetWrapper v) throws Exception {

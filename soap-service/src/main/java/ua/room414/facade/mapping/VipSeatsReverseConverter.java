@@ -1,4 +1,4 @@
-package ua.room414.facade.converter.impl;
+package ua.room414.facade.mapping;
 
 import com.github.jmnarloch.spring.boot.modelmapper.ConverterConfigurerSupport;
 import com.google.common.collect.Sets;
@@ -19,7 +19,6 @@ public class VipSeatsReverseConverter extends ConverterConfigurerSupport<Auditor
     @Override
     protected Converter<AuditoriumDto.VipSeats, Set<Long>> converter() {
         return new AbstractConverter<AuditoriumDto.VipSeats, Set<Long>>() {
-
             @Override
             protected Set<Long> convert(AuditoriumDto.VipSeats source) {
                 return Sets.newHashSet(source.getSeat());

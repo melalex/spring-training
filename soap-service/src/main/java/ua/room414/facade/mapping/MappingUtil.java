@@ -4,19 +4,19 @@ import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
- * @version 1.0 08 Jun 2017
+ * @version 1.0 11 Jun 2017
  */
-public final class MappingUtil {
+final public class MappingUtil {
 
     private MappingUtil() {
 
     }
 
-    public static String mapLocalDateTime(LocalDateTime dateTime) {
-        return dateTime.toString();
+    public static String mapLocalDateTime(LocalDateTime source) {
+        return source.toString();
     }
 
-    public static LocalDateTime reverseMapLocalDateTime(String dateTime) {
-        return LocalDateTime.parse(dateTime);
+    public static LocalDateTime reverseMapLocalDateTime(String source) {
+        return LocalDateTime.parse(source);
     }
 }

@@ -1,11 +1,10 @@
-package ua.room414.facade.converter.impl;
+package ua.room414.facade.mapping;
 
 import com.github.jmnarloch.spring.boot.modelmapper.ConverterConfigurerSupport;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.springframework.stereotype.Component;
 import ua.room414.dto.XmlSetWrapper;
-import ua.room414.facade.mapping.MappingUtil;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -21,7 +20,6 @@ public class AirDatesConverter extends ConverterConfigurerSupport<Set<LocalDateT
     @Override
     protected Converter<Set<LocalDateTime>, XmlSetWrapper> converter() {
         return new AbstractConverter<Set<LocalDateTime>, XmlSetWrapper>() {
-
             @Override
             protected XmlSetWrapper convert(Set<LocalDateTime> source) {
                 XmlSetWrapper result = new XmlSetWrapper();

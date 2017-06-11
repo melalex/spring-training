@@ -30,7 +30,7 @@ public class UserConverter implements Converter<User, UserDto> {
     public UserDto convert(User object) {
         UserDto userDto = modelMapper.map(object, UserDto.class);
 
-        userDto.setTicketDtos(mapTickets(object.getTickets()));
+        userDto.setTickets(mapTickets(object.getTickets()));
 
         return userDto;
     }
@@ -39,13 +39,13 @@ public class UserConverter implements Converter<User, UserDto> {
     public User reverse(UserDto object) {
         User user = modelMapper.map(object, User.class);
 
-        user.setTickets(reverseMapTickets(object.getTicketDtos()));
+        user.setTickets(reverseMapTickets(object.getTickets()));
 
         return user;
     }
 
-    private UserDto.TicketDtos mapTickets(Set<Ticket> tickets) {
-        UserDto.TicketDtos result = new UserDto.TicketDtos();
+    private UserDto.Tickets mapTickets(Set<Ticket> tickets) {
+        UserDto.Tickets result = new UserDto.Tickets();
 
         Type targetSetType = new TypeToken<Set<TicketDto>>() {}.getType();
         Set<TicketDto> ticketDtos = modelMapper.map(tickets, targetSetType);
@@ -55,7 +55,7 @@ public class UserConverter implements Converter<User, UserDto> {
         return result;
     }
 
-    private Set<Ticket> reverseMapTickets(UserDto.TicketDtos ticketDtos) {
+    private Set<Ticket> reverseMapTickets(UserDto.Tickets ticketDtos) {
         Type targetSetType = new TypeToken<Set<Ticket>>() {}.getType();
         return modelMapper.map(ticketDtos.getTicketDto(), targetSetType);
     }

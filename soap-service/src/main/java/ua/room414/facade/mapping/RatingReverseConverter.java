@@ -1,4 +1,4 @@
-package ua.room414.facade.converter.impl;
+package ua.room414.facade.mapping;
 
 import com.github.jmnarloch.spring.boot.modelmapper.ConverterConfigurerSupport;
 import org.modelmapper.AbstractConverter;
@@ -12,15 +12,14 @@ import ua.room414.dto.EventDtoRating;
  * @version 1.0 11 Jun 2017
  */
 @Component
-public class RatingConverter extends ConverterConfigurerSupport<EventRating, EventDtoRating> {
+public class RatingReverseConverter extends ConverterConfigurerSupport<EventDtoRating, EventRating> {
 
     @Override
-    protected Converter<EventRating, EventDtoRating> converter() {
-        return new AbstractConverter<EventRating, EventDtoRating>() {
-
+    protected Converter<EventDtoRating, EventRating> converter() {
+        return new AbstractConverter<EventDtoRating, EventRating>() {
             @Override
-            protected EventDtoRating convert(EventRating source) {
-                return EventDtoRating.fromValue(source.name());
+            protected EventRating convert(EventDtoRating source) {
+                return EventRating.valueOf(source.name());
             }
         };
     }

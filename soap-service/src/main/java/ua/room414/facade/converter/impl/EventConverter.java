@@ -35,7 +35,7 @@ public class EventConverter implements Converter<Event, EventDto> {
     public EventDto convert(Event object) {
         EventDto eventDto = modelMapper.map(object, EventDto.class);
 
-        eventDto.setAuditoriumDtos(mapAuditoriums(object.getAuditoriums()));
+        eventDto.setAuditoriums(mapAuditoriums(object.getAuditoriums()));
 
         return eventDto;
     }
@@ -44,7 +44,7 @@ public class EventConverter implements Converter<Event, EventDto> {
     public Event reverse(EventDto object) {
         Event event = modelMapper.map(object, Event.class);
 
-        event.setAuditoriums(reverseMapAuditoriums(object.getAuditoriumDtos()));
+        event.setAuditoriums(reverseMapAuditoriums(object.getAuditoriums()));
 
         return event;
     }

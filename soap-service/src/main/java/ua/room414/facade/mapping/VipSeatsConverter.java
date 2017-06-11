@@ -1,4 +1,4 @@
-package ua.room414.facade.converter.impl;
+package ua.room414.facade.mapping;
 
 import com.github.jmnarloch.spring.boot.modelmapper.ConverterConfigurerSupport;
 import org.modelmapper.AbstractConverter;
@@ -18,12 +18,13 @@ public class VipSeatsConverter extends ConverterConfigurerSupport<Set<Long>, Aud
     @Override
     protected Converter<Set<Long>, AuditoriumDto.VipSeats> converter() {
         return new AbstractConverter<Set<Long>, AuditoriumDto.VipSeats>() {
-
             @Override
             protected AuditoriumDto.VipSeats convert(Set<Long> source) {
                 AuditoriumDto.VipSeats result = new AuditoriumDto.VipSeats();
 
-                result.getSeat().addAll(source);
+                if (source != null) {
+                    result.getSeat().addAll(source);
+                }
 
                 return result;
             }

@@ -1,7 +1,5 @@
 package ua.room414;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +12,18 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.dsl.core.Pollers;
+import org.springframework.integration.dsl.support.Function;
 import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.FileReadingMessageSource;
 import org.springframework.integration.file.filters.RegexPatternFileListFilter;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
+import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandlingException;
+import org.springframework.messaging.support.MessageBuilder;
 
 import java.io.File;
 
@@ -34,8 +36,6 @@ import java.io.File;
 @IntegrationComponentScan
 @PropertySource("classpath:filesIntegration.properties")
 public class FilesIntegrationConfiguration {
-    private static final Logger LOG = LoggerFactory.getLogger(FilesIntegrationConfiguration.class);
-
     public static final String FILE_WRITING_INPUT_CHANEL = "fileWritingInputChanel";
     public static final String FILE_WRITING_OUTPUT_CHANEL = "fileWritingOutputChanel";
     public static final String FILE_HANDLER_INPUT_CHANEL = "addFileNameToIdsChanel";
@@ -98,15 +98,28 @@ public class FilesIntegrationConfiguration {
     public IntegrationFlow errorHandleFlow() {
         return IntegrationFlows
                 .from(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME)
-                .handle((p, h) -> {
-                    Message<?> message = ((MessageHandlingException) p).getFailedMessage();
-                    LOG.error("Error while processing file " + message.getHeaders().get(FileHeaders.FILENAME));
-                    return message;
-                })
-                .enrichHeaders(h -> h
-                        .header(DIRECTORY_PATH_HEADER, properties.getError()))
+                .log(LoggingHandler.Level.ERROR, errorMessageEvaluator())
+                .transform(errorMessageTransformer())
                 .channel(FILE_WRITING_INPUT_CHANEL)
                 .get();
+    }
+
+    @Bean
+    public Function<Message<MessageHandlingException>, Object> errorMessageEvaluator() {
+        return m -> "Error while processing file " + m
+                .getPayload()
+                .getFailedMessage()
+                .getHeaders()
+                .get(FileHeaders.FILENAME);
+    }
+
+    @Bean
+    public GenericTransformer<Message<MessageHandlingException>, Message<String>> errorMessageTransformer() {
+        return m -> MessageBuilder
+                .withPayload((String) m.getPayload().getFailedMessage().getPayload())
+                .setHeader(FileHeaders.FILENAME, m.getPayload().getFailedMessage().getHeaders().get(FileHeaders.FILENAME))
+                .setHeader(DIRECTORY_PATH_HEADER, properties.getError())
+                .build();
     }
 
     @Bean

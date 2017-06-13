@@ -29,12 +29,8 @@ public class CsvFileServiceImpl implements CsvFileService {
             while (csvScanner.hasNextLine()) {
                 String line = csvScanner.nextLine();
 
-                result.append(line).append(fileName).append("\n");
+                result.append(line).append(fileName).append(System.lineSeparator());
             }
-        }
-
-        if (true) {
-            throw new RuntimeException();
         }
 
         return result.toString();

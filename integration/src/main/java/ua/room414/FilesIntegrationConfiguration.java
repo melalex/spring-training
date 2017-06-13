@@ -12,14 +12,12 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.dsl.core.Pollers;
-import org.springframework.integration.dsl.support.Function;
 import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.FileReadingMessageSource;
 import org.springframework.integration.file.filters.RegexPatternFileListFilter;
 import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
-import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandlingException;
@@ -98,26 +96,24 @@ public class FilesIntegrationConfiguration {
     public IntegrationFlow errorHandleFlow() {
         return IntegrationFlows
                 .from(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME)
-                .log(LoggingHandler.Level.ERROR, errorMessageEvaluator())
-                .transform(errorMessageTransformer())
+                .log(LoggingHandler.Level.ERROR, this::errorMessageEvaluator)
+                .transform(this::errorMessageTransformer)
                 .channel(FILE_WRITING_INPUT_CHANEL)
                 .get();
     }
 
-    @Bean
-    public Function<Message<MessageHandlingException>, Object> errorMessageEvaluator() {
-        return m -> "Error while processing file " + m
+    private String errorMessageEvaluator(Message<MessageHandlingException> message) {
+        return "Error while processing file " + message
                 .getPayload()
                 .getFailedMessage()
                 .getHeaders()
                 .get(FileHeaders.FILENAME);
     }
 
-    @Bean
-    public GenericTransformer<Message<MessageHandlingException>, Message<String>> errorMessageTransformer() {
-        return m -> MessageBuilder
-                .withPayload((String) m.getPayload().getFailedMessage().getPayload())
-                .setHeader(FileHeaders.FILENAME, m.getPayload().getFailedMessage().getHeaders().get(FileHeaders.FILENAME))
+    private Message<String> errorMessageTransformer(MessageHandlingException message) {
+        return MessageBuilder
+                .withPayload((String) message.getFailedMessage().getPayload())
+                .setHeader(FileHeaders.FILENAME, message.getFailedMessage().getHeaders().get(FileHeaders.FILENAME))
                 .setHeader(DIRECTORY_PATH_HEADER, properties.getError())
                 .build();
     }

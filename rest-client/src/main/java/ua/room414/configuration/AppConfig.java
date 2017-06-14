@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * @version 1.0 14 Jun 2017
  */
 @Configuration
-@PropertySource("classpath:filesIntegration.properties")
+@PropertySource("classpath:properties/anapioficeandfire.properties")
 @EnableConfigurationProperties(IceAndFireApiProperties.class)
 public class AppConfig {
 
@@ -20,4 +20,6 @@ public class AppConfig {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
+
+
 }

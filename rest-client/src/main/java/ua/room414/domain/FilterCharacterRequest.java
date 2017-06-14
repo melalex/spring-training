@@ -14,5 +14,5 @@ public class FilterCharacterRequest {
     private String culture;
     private String born;
     private String died;
-    private boolean isAlive;
+    private Boolean isAlive;
 }

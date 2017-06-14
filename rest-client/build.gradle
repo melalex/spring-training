@@ -21,11 +21,14 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
-    compile('org.springframework:spring-web')
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-devtools")
+
     compile('com.google.guava:guava:22.0')
-    compile('com.fasterxml.jackson.core:jackson-databind:2.0.1')
+    compile('com.fasterxml.jackson.core:jackson-core:2.9.0.pr3')
     compile('com.github.jmnarloch:modelmapper-spring-boot-starter:1.1.0')
 
     compile('org.springframework.boot:spring-boot-configuration-processor')

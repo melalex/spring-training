@@ -18,17 +18,4 @@ public class CharacterDto {
     private String culture;
     private String born;
     private String died;
-
-    private List<String> titles;
-    private List<String> aliases;
-
-    private CharacterDto father;
-    private CharacterDto mather;
-    private CharacterDto spouse;
-
-    private List<String> allegiances;
-    private List<String> books;
-    private List<String> povBooks;
-    private List<String> tvSeries;
-    private List<String> playedBy;
 }

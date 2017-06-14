@@ -1,8 +1,7 @@
 package ua.room414.facade;
 
-import ua.room414.domain.Character;
-import ua.room414.domain.FilterCharacterRequest;
 import ua.room414.facade.dto.CharacterDto;
+import ua.room414.facade.dto.FilterCharacterRequestDto;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public interface CharacterFacade {
 
-    List<CharacterDto> filter(FilterCharacterRequest request);
+    List<CharacterDto> filter(FilterCharacterRequestDto request);
 
     CharacterDto find(long id);
 }

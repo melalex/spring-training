@@ -1,6 +1,7 @@
 package ua.room414.facade.mapping;
 
 import com.github.jmnarloch.spring.boot.modelmapper.PropertyMapConfigurerSupport;
+import org.modelmapper.Converter;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import ua.room414.facade.mapping.converter.IdConverter;
  */
 @Component
 public class CharacterPropertyMap extends PropertyMapConfigurerSupport<Character, CharacterDto> {
-    private IdConverter idConverter;
+    private Converter<String, Long> idConverter;
 
     @Autowired
     public void setIdConverter(IdConverter idConverter) {

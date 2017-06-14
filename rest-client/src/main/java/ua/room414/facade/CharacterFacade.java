@@ -1,5 +1,6 @@
 package ua.room414.facade;
 
+import ua.room414.facade.dto.CharacterDetailsDto;
 import ua.room414.facade.dto.CharacterDto;
 import ua.room414.facade.dto.FilterCharacterRequestDto;
 
@@ -13,5 +14,5 @@ public interface CharacterFacade {
 
     List<CharacterDto> filter(FilterCharacterRequestDto request);
 
-    CharacterDto find(long id);
+    CharacterDetailsDto find(long id);
 }

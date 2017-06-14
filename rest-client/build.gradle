@@ -23,9 +23,9 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.springframework.boot:spring-boot-starter')
 
     compile('com.google.guava:guava:22.0')
     compile('com.fasterxml.jackson.core:jackson-core:2.9.0.pr3')

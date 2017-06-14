@@ -7,6 +7,7 @@ import ua.room414.anotation.Facade;
 import ua.room414.domain.Character;
 import ua.room414.domain.FilterCharacterRequest;
 import ua.room414.facade.CharacterFacade;
+import ua.room414.facade.dto.CharacterDetailsDto;
 import ua.room414.facade.dto.CharacterDto;
 import ua.room414.facade.dto.FilterCharacterRequestDto;
 import ua.room414.service.CharacterService;
@@ -39,9 +40,9 @@ public class CharacterFacadeImpl implements CharacterFacade {
     }
 
     @Override
-    public CharacterDto find(long id) {
+    public CharacterDetailsDto find(long id) {
         final Character character = characterService.find(id);
 
-        return modelMapper.map(character, CharacterDto.class);
+        return modelMapper.map(character, CharacterDetailsDto.class);
     }
 }

@@ -29,6 +29,7 @@ repositories {
 ext {
     bootsrapVersion = '4.0.0-alpha.6-1'
     jQueryVersion = '3.2.1'
+    layoutDialectVersion = '1.3.1'
     webjarsLocatorVersion = '0.32-1'
     modelMapperStarterVersion = '1.1.0'
     guavaVersion = '22.0'
@@ -58,11 +59,14 @@ webResources {
 
 dependencies {
     // Spring boot
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-configuration-processor")
     compile("com.github.jmnarloch:modelmapper-spring-boot-starter:${modelMapperStarterVersion}")
+
+    // Thymeleaf
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${layoutDialectVersion}")
 
     // Guava
     compile("com.google.guava:guava:${guavaVersion}")

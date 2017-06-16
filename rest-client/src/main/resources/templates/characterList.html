@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Characters</title>
+<!--<html xmlns:th="http://www.thymeleaf.org" th:replace="layouts/default :: layout(~{::body}, 'Characters')">-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 
-    <link href="theme-default.css" rel="stylesheet" type="text/css"/>
-    <script src="core.js" type="text/javascript"></script>
+<head>
+    <title layout:fragment="title">Characters</title>
 </head>
+
 <body>
 
-<div class="container">
-    <table class="table">
+<div layout:fragment="content">
+    <h1>Characters</h1>
+
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>#</th>

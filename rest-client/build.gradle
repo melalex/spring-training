@@ -1,38 +1,84 @@
 buildscript {
     ext {
         springBootVersion = '1.5.4.RELEASE'
+        wro4jVersion = '1.8.0.Beta4'
     }
     repositories {
+        jcenter()
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("ro.isdc.wro4j.gradle:wro4j-gradle-plugin:${wro4jVersion}")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'wro4j'
 apply plugin: 'org.springframework.boot'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
+ext {
+    bootsrapVersion = '4.0.0-alpha.6-1'
+    jQueryVersion = '3.2.1'
+    webjarsLocatorVersion = '0.32-1'
+    modelMapperStarterVersion = '1.1.0'
+    guavaVersion = '22.0'
+    jacksonVersion = '2.9.0.pr3'
+}
+
+webResources {
+    bundle('core') {
+        js('js/**/*.js')
+        preProcessor('jsMin')
+    }
+    bundle('libs') {
+        js("webjars/bootstrap/${bootsrapVersion}/js/bootstrap.min.js")
+        js("webjars/jquery/${jQueryVersion}/jquery.min.js")
+    }
+    bundle('theme-default') {
+        css("webjars/bootstrap/${bootsrapVersion}/css/bootstrap.min.css")
+
+        cssOverrideImport('general.scss', '../../../../themes/default/general.scss')
+        postProcessor('rubySassCss')
+        cssRewriteUrl()
+    }
+    assets {
+        include 'themes/default/images/**'
+    }
+}
 
 dependencies {
+    // Spring boot
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
-    compile('org.springframework.boot:spring-boot-starter')
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-configuration-processor")
+    compile("com.github.jmnarloch:modelmapper-spring-boot-starter:${modelMapperStarterVersion}")
 
-    compile('com.google.guava:guava:22.0')
-    compile('com.fasterxml.jackson.core:jackson-core:2.9.0.pr3')
-    compile('com.github.jmnarloch:modelmapper-spring-boot-starter:1.1.0')
+    // Guava
+    compile("com.google.guava:guava:${guavaVersion}")
 
-    compile('org.springframework.boot:spring-boot-configuration-processor')
+    // Jackson
+    compile("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
 
-    compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    // Lombok
+    compileOnly("org.projectlombok:lombok")
+
+    // Webjars
+    webjars("org.webjars:jquery:${jQueryVersion}")
+    webjarsRuntime ("org.webjars:bootstrap:${bootsrapVersion}")  {
+        transitive = false
+    }
+
+    // Tests
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }

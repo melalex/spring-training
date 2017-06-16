@@ -15,11 +15,17 @@ import ua.room414.facade.dto.CharacterDetailsDto;
 @Component
 public class CharacterDetailsPropertyMap extends PropertyMapConfigurerSupport<Character, CharacterDetailsDto> {
     private Converter<String, Long> idConverter;
+    private Converter<String, String> emptyStringConverter;
     private Converter<String, CharacterDetailsDto.FamilyMember> familyMemberConverter;
 
     @Autowired
     public void setIdConverter(Converter<String, Long> idConverter) {
         this.idConverter = idConverter;
+    }
+
+    @Autowired
+    public void setEmptyStringConverter(Converter<String, String> emptyStringConverter) {
+        this.emptyStringConverter = emptyStringConverter;
     }
 
     @Autowired
@@ -33,6 +39,11 @@ public class CharacterDetailsPropertyMap extends PropertyMapConfigurerSupport<Ch
             @Override
             protected void configure() {
                 using(idConverter).map(source.getUrl(), destination.getId());
+
+                using(emptyStringConverter).map(source.getName(), destination.getName());
+                using(emptyStringConverter).map(source.getCulture(), destination.getCulture());
+                using(emptyStringConverter).map(source.getBorn(), destination.getBorn());
+                using(emptyStringConverter).map(source.getDied(), destination.getDied());
 
                 using(familyMemberConverter).map(source.getFather(), destination.getFather());
                 using(familyMemberConverter).map(source.getMather(), destination.getMather());

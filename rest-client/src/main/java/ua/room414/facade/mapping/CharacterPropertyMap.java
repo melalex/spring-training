@@ -16,10 +16,12 @@ import ua.room414.facade.mapping.converter.IdConverter;
 @Component
 public class CharacterPropertyMap extends PropertyMapConfigurerSupport<Character, CharacterDto> {
     private Converter<String, Long> idConverter;
+    private Converter<String, String> emptyStringConverter;
 
     @Autowired
-    public void setIdConverter(IdConverter idConverter) {
+    public CharacterPropertyMap(Converter<String, Long> idConverter, Converter<String, String> emptyStringConverter) {
         this.idConverter = idConverter;
+        this.emptyStringConverter = emptyStringConverter;
     }
 
     @Override
@@ -28,6 +30,11 @@ public class CharacterPropertyMap extends PropertyMapConfigurerSupport<Character
             @Override
             protected void configure() {
                 using(idConverter).map(source.getUrl(), destination.getId());
+
+                using(emptyStringConverter).map(source.getName(), destination.getName());
+                using(emptyStringConverter).map(source.getCulture(), destination.getCulture());
+                using(emptyStringConverter).map(source.getBorn(), destination.getBorn());
+                using(emptyStringConverter).map(source.getDied(), destination.getDied());
             }
         };
     }

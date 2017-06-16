@@ -1,11 +1,8 @@
-package ua.room414.controller;
+package ua.room414.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.room414.facade.CharacterFacade;
 import ua.room414.facade.dto.CharacterDetailsDto;
@@ -21,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/characters")
 public class CharacterController {
-    private static final String FIND_MANY_VIEW = "characters";
+    private static final String FIND_MANY_VIEW = "characterList";
     private static final String FIND_MANY_MODEL = "characters";
 
     private static final String CHARACTER_DETAILS_VIEW = "characterDetails";
@@ -35,7 +32,7 @@ public class CharacterController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ModelAndView findOne(@RequestParam("id") long id) {
+    public ModelAndView findOne(@PathVariable("id") long id) {
         final CharacterDetailsDto model = characterFacade.find(id);
 
         return new ModelAndView(CHARACTER_DETAILS_VIEW, CHARACTER_DETAILS_MODEL, model);

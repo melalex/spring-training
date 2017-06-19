@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class CharacterDetailsDto {
-    private String id;
+    private long id;
 
     private String name;
     private Gender gender;
@@ -22,9 +22,9 @@ public class CharacterDetailsDto {
     private List<String> titles;
     private List<String> aliases;
 
-    private String father;
-    private String mather;
-    private String spouse;
+    private FamilyMember father;
+    private FamilyMember mather;
+    private FamilyMember spouse;
 
     private List<String> allegiances;
     private List<String> books;

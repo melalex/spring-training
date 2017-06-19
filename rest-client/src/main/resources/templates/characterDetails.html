@@ -1,10 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+
 <head>
-    <meta charset="UTF-8">
     <title>Character Details</title>
 </head>
+
 <body>
+
+<div layout:fragment="content">
+    <h1>Character Details</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>Name</p>
+        </div>
+        <div class="col-md-8">
+            <p th:text="${character.name}">N/A</p>
+        </div>
+
+        <div class="col-md-4">
+            <p>Gender</p>
+        </div>
+        <div class="col-md-8">
+            <p th:text="${character.gender}">N/A</p>
+        </div>
+
+        <div class="col-md-4">
+            <p>Culture</p>
+        </div>
+        <div class="col-md-8">
+            <p th:text="${character.culture}">N/A</p>
+        </div>
+
+        <div class="col-md-4">
+            <p>Born</p>
+        </div>
+        <div class="col-md-8">
+            <p th:text="${character.born}">N/A</p>
+        </div>
+
+        <div class="col-md-4">
+            <p>Died</p>
+        </div>
+        <div class="col-md-8">
+            <p th:text="${character.died}">N/A</p>
+        </div>
+
+        <div class="col-md-4">
+            <p>Father</p>
+        </div>
+        <div class="col-md-8">
+            <a th:text="${character.father.name}" th:href="@{/characters/{id}(id=${character.father.id})}">N/A</a>
+        </div>
+
+        <div class="col-md-4">
+            <p>Mather</p>
+        </div>
+        <div class="col-md-8">
+            <a th:text="${character.mather.name}" th:href="@{/characters/{id}(id=${character.mather.id})}">N/A</a>
+        </div>
+
+        <div class="col-md-4">
+            <p>Spouse</p>
+        </div>
+        <div class="col-md-8">
+            <a th:text="${character.spouse.name}" th:href="@{/characters/{id}(id=${character.spouse.id})}">N/A</a>
+        </div>
+
+        <div class="col-md-4">
+            <p>Titles</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="title : ${character.titles}" th:text="${title}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>Aliases</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="aliase : ${character.aliases}" th:text="${aliase}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>Allegiances</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="allegiance : ${character.allegiances}" th:text="${allegiance}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>Books</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="book : ${character.books}" th:text="${book}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>Pov books</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="povBook : ${character.povBooks}" th:text="${povBook}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>TV series</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="series : ${character.tvSeries}" th:text="${series}">N/A</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <p>Played by</p>
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li th:each="actor : ${character.playedBy}" th:text="${actor}">N/A</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>

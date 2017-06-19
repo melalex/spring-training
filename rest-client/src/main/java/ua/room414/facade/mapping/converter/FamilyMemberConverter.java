@@ -1,5 +1,6 @@
 package ua.room414.facade.mapping.converter;
 
+import com.google.common.base.Strings;
 import org.modelmapper.AbstractConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +25,16 @@ public class FamilyMemberConverter extends AbstractConverter<String, CharacterDe
 
     @Override
     protected CharacterDetailsDto.FamilyMember convert(final String source) {
-        final Character character = characterService.find(source);
         final CharacterDetailsDto.FamilyMember familyMember = new CharacterDetailsDto.FamilyMember();
 
-        familyMember.setId(idConverter.convert(character.getUrl()));
-        familyMember.setName(character.getName());
+        if (!Strings.isNullOrEmpty(source)) {
+            final Character character = characterService.find(source);
+
+            familyMember.setId(idConverter.convert(character.getUrl()));
+            familyMember.setName(character.getName());
+
+            return familyMember;
+        }
 
         return familyMember;
     }

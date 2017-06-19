@@ -3,7 +3,6 @@ package ua.room414.facade.dto;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -15,6 +14,6 @@ public class TicketDto {
     private long id;
     private UserDto user;
     private EventDto event;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private long seat;
 }

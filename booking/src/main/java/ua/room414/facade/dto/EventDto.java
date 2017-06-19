@@ -4,8 +4,7 @@ import lombok.Data;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,8 +18,19 @@ public class EventDto {
     private String name;
 
     @XmlElementWrapper
-    private Set<LocalDateTime> airDates;
+    private Set<String> airDates;
     private double basePrice;
     private EventRatingDto rating;
-    private Map<LocalDateTime, AuditoriumDto> auditoriums;
+    private AdaptedMap auditoriums;
+
+    @Data
+    public static class AdaptedMap {
+        private List<AdaptedMapEntry> content;
+    }
+
+    @Data
+    public static class AdaptedMapEntry {
+        private String key;
+        private AuditoriumDto auditorium;
+    }
 }

@@ -6,6 +6,4 @@
 
     <context:component-scan base-package="ua.room414.facade"/>
 
-    <bean id="modelMapper" class="org.modelmapper.ModelMapper"/>
-
 </beans>

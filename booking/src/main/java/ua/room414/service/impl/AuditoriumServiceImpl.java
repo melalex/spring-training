@@ -32,7 +32,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     @Transactional(readOnly = true)
-    public Auditorium getByName(String name) {
+    public Auditorium getByName(final String name) {
         return auditoriumRepository.findAuditoriumByName(name);
     }
 }

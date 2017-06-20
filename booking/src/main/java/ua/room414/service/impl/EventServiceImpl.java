@@ -28,18 +28,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event save(Event object) {
+    public Event save(final Event object) {
         return eventRepository.save(object);
     }
 
     @Override
-    public void remove(Event object) {
+    public void remove(final Event object) {
         eventRepository.delete(object);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Event getById(Long id) {
+    public Event getById(final Long id) {
         return eventRepository.findOne(id);
     }
 
@@ -51,13 +51,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
-    public Event getByName(String name) {
+    public Event getByName(final String name) {
         return eventRepository.findEventByName(name);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Set<Event> getForDateRange(LocalDate from, LocalDate to) {
+    public Set<Event> getForDateRange(final LocalDate from, final LocalDate to) {
         DateTime begin = from.toDateTimeAtStartOfDay();
         DateTime end = to.plusDays(1).toDateTimeAtStartOfDay();
 
@@ -66,7 +66,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<Event> getNextEvents(DateTime to) {
+    public Set<Event> getNextEvents(final DateTime to) {
         return eventRepository.findAllByAirDatesAfterAndAirDatesBefore(DateTime.now(), to);
     }
 }

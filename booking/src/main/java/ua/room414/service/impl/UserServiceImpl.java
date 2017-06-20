@@ -25,18 +25,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User object) {
+    public User save(final User object) {
         return userRepository.save(object);
     }
 
     @Override
-    public void remove(User object) {
+    public void remove(final User object) {
         userRepository.delete(object);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User getById(Long id) {
+    public User getById(final Long id) {
         return userRepository.findOne(id);
     }
 
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserByEmail(String email) {
+    public User getUserByEmail(final String email) {
         return userRepository.findUserByEmail(email);
     }
 }

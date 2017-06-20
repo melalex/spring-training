@@ -20,7 +20,7 @@ public class Auditorium implements Serializable {
     private long id;
     private String name;
     private long numberOfSeats;
-    private Set<Long> vipSeats;
+    private Set<Integer> vipSeats;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,11 +51,11 @@ public class Auditorium implements Serializable {
 
     @ElementCollection
     @CollectionTable(name = "vip_seats", joinColumns = @JoinColumn(name = "auditorium_id"))
-    public Set<Long> getVipSeats() {
+    public Set<Integer> getVipSeats() {
         return vipSeats;
     }
 
-    public void setVipSeats(Set<Long> vipSeats) {
+    public void setVipSeats(Set<Integer> vipSeats) {
         this.vipSeats = vipSeats;
     }
 }

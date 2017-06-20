@@ -34,7 +34,7 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public double getTicketsPrice(final EventDto event, final DateTime dateTime, final UserDto user, final Set<Long> seats) {
+    public double getTicketsPrice(final EventDto event, final DateTime dateTime, final UserDto user, final Set<Integer> seats) {
         final User userEntity = modelMapper.map(user, User.class);
         final Event eventEntity = modelMapper.map(event, Event.class);
 

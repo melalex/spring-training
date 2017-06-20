@@ -5,7 +5,6 @@ import ua.room414.domain.Event;
 import ua.room414.domain.Ticket;
 import ua.room414.domain.User;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -25,7 +24,7 @@ public interface BookingService {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(Event event, DateTime dateTime, User user, Set<Long> seats);
+    double getTicketsPrice(Event event, DateTime dateTime, User user, Set<Integer> seats);
 
     /**
      * Books tickets in internal system. If user is not

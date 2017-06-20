@@ -27,7 +27,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public double getDiscount(User user, Event event, DateTime airDateTime, int numberOfTickets) {
+    public double getDiscount(final User user, final Event event, final DateTime airDateTime, final int numberOfTickets) {
         return discountStrategies
                 .stream()
                 .map(s -> s.getDiscount(user, event, airDateTime, numberOfTickets))

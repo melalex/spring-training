@@ -24,7 +24,7 @@ public interface BookingFacade {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(EventDto event, DateTime dateTime, UserDto user, Set<Long> seats);
+    double getTicketsPrice(EventDto event, DateTime dateTime, UserDto user, Set<Integer> seats);
 
     /**
      * Books tickets in internal system. If user is not

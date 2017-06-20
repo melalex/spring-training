@@ -1,5 +1,7 @@
 package ua.room414.facade.impl;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import ua.room414.facade.dto.EventList;
 import ua.room414.service.EventService;
 
 import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -40,7 +40,7 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public void remove(final EventDto object) {
-        Event event = modelMapper.map(object, Event.class);
+        final Event event = modelMapper.map(object, Event.class);
         eventService.remove(event);
     }
 
@@ -60,7 +60,7 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public EventList getNextEvents(LocalDateTime to) {
+    public EventList getNextEvents(DateTime to) {
         return mapEventList(eventService.getNextEvents(to));
     }
 
@@ -70,8 +70,8 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     private EventList mapEventList(final Iterable<Event> events) {
-        Type listType = new TypeToken<Iterable<EventDto>>() {}.getType();
-        Iterable<EventDto> eventDtos = modelMapper.map(events, listType);
+        final Type listType = new TypeToken<Iterable<EventDto>>() {}.getType();
+        final Iterable<EventDto> eventDtos = modelMapper.map(events, listType);
 
         return EventList.of(eventDtos);
     }

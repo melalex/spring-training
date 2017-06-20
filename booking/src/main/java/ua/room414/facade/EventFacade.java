@@ -1,10 +1,9 @@
 package ua.room414.facade;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import ua.room414.facade.dto.EventDto;
 import ua.room414.facade.dto.EventList;
-
-import java.time.LocalDate;
 
 /**
  * @author Alexander Melashchenko

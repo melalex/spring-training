@@ -39,7 +39,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public void remove(final UserDto object) {
-        User user = modelMapper.map(object, User.class);
+        final User user = modelMapper.map(object, User.class);
         userService.remove(user);
     }
 
@@ -50,8 +50,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserList getAll() {
-        List<User> users = userService.getAll();
-        return mapUserList(users);
+        return mapUserList(userService.getAll());
     }
 
     @Override
@@ -60,8 +59,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     private UserList mapUserList(final Iterable<User> users) {
-        Type listType = new TypeToken<Iterable<UserDto>>() {}.getType();
-        Iterable<UserDto> userDtos = modelMapper.map(users, listType);
+        final Type listType = new TypeToken<Iterable<UserDto>>() {}.getType();
+        final Iterable<UserDto> userDtos = modelMapper.map(users, listType);
 
         return UserList.of(userDtos);
     }

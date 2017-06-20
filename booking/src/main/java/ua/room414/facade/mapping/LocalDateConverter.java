@@ -1,9 +1,9 @@
 package ua.room414.facade.mapping;
 
+import org.joda.time.LocalDate;
 import org.modelmapper.AbstractConverter;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 
 /**
  * @author Alexander Melashchenko

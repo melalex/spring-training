@@ -1,9 +1,9 @@
 package ua.room414.service;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import ua.room414.domain.Event;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -38,5 +38,5 @@ public interface EventService extends CrudService<Long, Event> {
      * s
      * @return Set of events
      */
-    Set<Event> getNextEvents(LocalDateTime to);
+    Set<Event> getNextEvents(DateTime to);
 }

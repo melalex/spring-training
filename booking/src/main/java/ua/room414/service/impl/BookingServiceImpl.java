@@ -1,6 +1,7 @@
 package ua.room414.service.impl;
 
 import com.google.common.collect.Sets;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {
+    public double getTicketsPrice(Event event, DateTime dateTime, User user, Set<Long> seats) {
         return 0;
     }
 
@@ -39,7 +40,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
+    public Set<Ticket> getPurchasedTicketsForEvent(Event event, DateTime dateTime) {
         return Sets.newHashSet(ticketRepository.findAllByEventAndDateTime(event, dateTime));
     }
 }

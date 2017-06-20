@@ -1,10 +1,10 @@
 package ua.room414.facade;
 
+import org.joda.time.DateTime;
 import ua.room414.facade.dto.EventDto;
 import ua.room414.facade.dto.EventList;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -45,5 +45,5 @@ public interface EventFacade extends CrudFacade<Long, EventDto> {
      * s
      * @return Set of events
      */
-    EventList getNextEvents(LocalDateTime to);
+    EventList getNextEvents(DateTime to);
 }

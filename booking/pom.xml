@@ -42,6 +42,7 @@
         <lombok.version>1.16.16</lombok.version>
         <lombok.plugin.version>1.16.16.0</lombok.plugin.version>
         <mapper.version>0.7.5</mapper.version>
+        <joda.version>2.9.9</joda.version>
     </properties>
 
     <dependencies>
@@ -166,6 +167,11 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${mapper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.version}</version>
         </dependency>
 
     </dependencies>

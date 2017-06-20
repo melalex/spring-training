@@ -1,6 +1,8 @@
 package ua.room414.service.impl;
 
 import com.google.common.collect.Lists;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,8 +10,6 @@ import ua.room414.domain.Event;
 import ua.room414.repository.EventRepository;
 import ua.room414.service.EventService;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -56,12 +56,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Event> getForDateRange(LocalDate from, LocalDate to) {
-        return null;
+        DateTime begin = from.toDateTimeAtStartOfDay();
+        DateTime end = to.plusDays(1).toDateTimeAtStartOfDay();
+
+        return eventRepository.findAllByAirDatesAfterAndAirDatesBefore(begin, end);
     }
 
     @Override
-    public Set<Event> getNextEvents(LocalDateTime to) {
-        return null;
+    @Transactional(readOnly = true)
+    public Set<Event> getNextEvents(DateTime to) {
+        return eventRepository.findAllByAirDatesAfterAndAirDatesBefore(DateTime.now(), to);
     }
 }

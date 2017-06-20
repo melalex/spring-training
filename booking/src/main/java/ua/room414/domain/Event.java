@@ -2,10 +2,10 @@ package ua.room414.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,10 +21,10 @@ public class Event implements Serializable {
 
     private long id;
     private String name;
-    private Set<LocalDateTime> airDates;
+    private Set<DateTime> airDates;
     private double basePrice;
     private EventRating rating;
-    private Map<LocalDateTime, Auditorium> auditoriums;
+    private Map<DateTime, Auditorium> auditoriums;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,12 +46,13 @@ public class Event implements Serializable {
     }
 
     @ElementCollection
+    @Temporal(TemporalType.TIMESTAMP)
     @CollectionTable(name = "airDate", joinColumns = @JoinColumn(name = "event_id"))
-    public Set<LocalDateTime> getAirDates() {
+    public Set<DateTime> getAirDates() {
         return airDates;
     }
 
-    public void setAirDates(Set<LocalDateTime> airDates) {
+    public void setAirDates(Set<DateTime> airDates) {
         this.airDates = airDates;
     }
 
@@ -74,12 +75,13 @@ public class Event implements Serializable {
 
     @ElementCollection
     @MapKeyColumn(name="airDatetime")
+    @Temporal(TemporalType.TIMESTAMP)
     @CollectionTable(name="datetimeAuditoriumMap", joinColumns=@JoinColumn(name="event_id"))
-    public Map<LocalDateTime, Auditorium> getAuditoriums() {
+    public Map<DateTime, Auditorium> getAuditoriums() {
         return auditoriums;
     }
 
-    public void setAuditoriums(Map<LocalDateTime, Auditorium> auditoriums) {
+    public void setAuditoriums(Map<DateTime, Auditorium> auditoriums) {
         this.auditoriums = auditoriums;
     }
 }

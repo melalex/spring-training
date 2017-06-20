@@ -17,6 +17,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String birthday;
 
     @XmlElementWrapper
     private Set<TicketDto> tickets;

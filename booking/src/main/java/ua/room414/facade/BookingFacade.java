@@ -1,11 +1,11 @@
 package ua.room414.facade;
 
+import org.joda.time.DateTime;
 import ua.room414.facade.dto.EventDto;
 import ua.room414.facade.dto.TicketDto;
 import ua.room414.facade.dto.TicketList;
 import ua.room414.facade.dto.UserDto;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -24,7 +24,7 @@ public interface BookingFacade {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(EventDto event, LocalDateTime dateTime, UserDto user, Set<Long> seats);
+    double getTicketsPrice(EventDto event, DateTime dateTime, UserDto user, Set<Long> seats);
 
     /**
      * Books tickets in internal system. If user is not
@@ -41,5 +41,5 @@ public interface BookingFacade {
      * @param dateTime Date and time of airing of event
      * @return set of all purchased tickets
      */
-    TicketList getPurchasedTicketsForEvent(EventDto event, LocalDateTime dateTime);
+    TicketList getPurchasedTicketsForEvent(EventDto event, DateTime dateTime);
 }

@@ -1,5 +1,6 @@
 package ua.room414.service;
 
+import org.joda.time.DateTime;
 import ua.room414.domain.Event;
 import ua.room414.domain.Ticket;
 import ua.room414.domain.User;
@@ -24,7 +25,7 @@ public interface BookingService {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats);
+    double getTicketsPrice(Event event, DateTime dateTime, User user, Set<Long> seats);
 
     /**
      * Books tickets in internal system. If user is not
@@ -41,5 +42,5 @@ public interface BookingService {
      * @param dateTime Date and time of airing of event
      * @return set of all purchased tickets
      */
-    Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime);
+    Set<Ticket> getPurchasedTicketsForEvent(Event event, DateTime dateTime);
 }

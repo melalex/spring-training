@@ -3,10 +3,10 @@ package ua.room414.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -21,7 +21,7 @@ public class Ticket implements Serializable {
     private long id;
     private User user;
     private Event event;
-    private LocalDateTime dateTime;
+    private DateTime dateTime;
     private long seat;
 
     @Id
@@ -54,11 +54,12 @@ public class Ticket implements Serializable {
         this.event = event;
     }
 
-    public LocalDateTime getDateTime() {
+    @Temporal(TemporalType.TIMESTAMP)
+    public DateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(DateTime dateTime) {
         this.dateTime = dateTime;
     }
 

@@ -2,6 +2,7 @@ package ua.room414.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private LocalDate birthday;
     private Set<Ticket> tickets;
 
     @Id
@@ -56,6 +58,15 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Temporal(TemporalType.DATE)
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

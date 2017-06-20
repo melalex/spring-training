@@ -1,12 +1,16 @@
 package ua.room414.service.impl;
 
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.room414.domain.Event;
 import ua.room414.domain.User;
 import ua.room414.service.DiscountService;
+import ua.room414.service.strategy.DiscountStrategy;
 
-import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Alexander Melashchenko
@@ -15,8 +19,19 @@ import java.time.LocalDateTime;
 @Service
 @Transactional
 public class DiscountServiceImpl implements DiscountService {
+    private List<DiscountStrategy> discountStrategies;
+
+    @Autowired
+    public DiscountServiceImpl(List<DiscountStrategy> discountStrategies) {
+        this.discountStrategies = discountStrategies;
+    }
+
     @Override
-    public byte getDiscount(User user, Event event, LocalDateTime airDateTime, long numberOfTickets) {
-        return 0;
+    public double getDiscount(User user, Event event, DateTime airDateTime, int numberOfTickets) {
+        return discountStrategies
+                .stream()
+                .map(s -> s.getDiscount(user, event, airDateTime, numberOfTickets))
+                .min(Comparator.comparingDouble(a -> a))
+                .orElse(1d);
     }
 }

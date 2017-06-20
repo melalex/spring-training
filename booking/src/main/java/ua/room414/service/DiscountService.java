@@ -1,9 +1,8 @@
 package ua.room414.service;
 
+import org.joda.time.DateTime;
 import ua.room414.domain.Event;
 import ua.room414.domain.User;
-
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -21,5 +20,5 @@ public interface DiscountService {
      * @param numberOfTickets Number of tickets that user buys
      * @return discount value from 0 to 100
      */
-    byte getDiscount(User user, Event event, LocalDateTime airDateTime, long numberOfTickets);
+    double getDiscount(User user, Event event, DateTime airDateTime, int numberOfTickets);
 }

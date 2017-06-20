@@ -1,13 +1,12 @@
 package ua.room414.facade.mapping;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Alexander Melashchenko
@@ -15,19 +14,19 @@ import java.time.LocalDateTime;
  */
 @Configuration
 public class MappingConfiguration {
-    private Converter<LocalDateTime, String> localDateTimeConverter;
-    private Converter<String, LocalDateTime> localDateTimeReverseConverter;
+    private Converter<DateTime, String> localDateTimeConverter;
+    private Converter<String, DateTime> localDateTimeReverseConverter;
 
     private Converter<LocalDate, String> localDateConverter;
     private Converter<String, LocalDate> localDateReverseConverter;
 
     @Autowired
-    public void setLocalDateTimeConverter(Converter<LocalDateTime, String> localDateTimeConverter) {
+    public void setLocalDateTimeConverter(Converter<DateTime, String> localDateTimeConverter) {
         this.localDateTimeConverter = localDateTimeConverter;
     }
 
     @Autowired
-    public void setLocalDateTimeReverseConverter(Converter<String, LocalDateTime> localDateTimeReverseConverter) {
+    public void setLocalDateTimeReverseConverter(Converter<String, DateTime> localDateTimeReverseConverter) {
         this.localDateTimeReverseConverter = localDateTimeReverseConverter;
     }
 

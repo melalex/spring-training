@@ -8,5 +8,6 @@ import ua.room414.domain.Auditorium;
  * @version 1.0 01 Jun 2017
  */
 public interface AuditoriumRepository extends CrudRepository<Auditorium, Long> {
+
     Auditorium findAuditoriumByName(String name);
 }

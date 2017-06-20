@@ -8,5 +8,6 @@ import ua.room414.domain.User;
  * @version 1.0 01 Jun 2017
  */
 public interface UserRepository extends CrudRepository<User, Long> {
+
     User findUserByEmail(String email);
 }

@@ -14,6 +14,6 @@ public class LocalDateConverter extends AbstractConverter<LocalDate, String> {
 
     @Override
     protected String convert(LocalDate source) {
-        return null;
+        return source.toString();
     }
 }

@@ -2,6 +2,7 @@ package ua.room414.facade;
 
 import ua.room414.facade.dto.EventDto;
 import ua.room414.facade.dto.TicketDto;
+import ua.room414.facade.dto.TicketList;
 import ua.room414.facade.dto.UserDto;
 
 import java.time.LocalDateTime;
@@ -40,6 +41,5 @@ public interface BookingFacade {
      * @param dateTime Date and time of airing of event
      * @return set of all purchased tickets
      */
-    Set<TicketDto> getPurchasedTicketsForEvent(EventDto event, LocalDateTime dateTime);
-
+    TicketList getPurchasedTicketsForEvent(EventDto event, LocalDateTime dateTime);
 }

@@ -1,8 +1,7 @@
 package ua.room414.facade;
 
 import ua.room414.facade.dto.AuditoriumDto;
-
-import java.util.Set;
+import ua.room414.facade.dto.AuditoriumList;
 
 /**
  * @author Alexander Melashchenko
@@ -14,7 +13,7 @@ public interface AuditoriumFacade {
      *
      * @return set of all auditoriums
      */
-    Set<AuditoriumDto> getAll();
+    AuditoriumList getAll();
 
     /**
      * Finding auditorium by name

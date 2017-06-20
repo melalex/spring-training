@@ -1,12 +1,10 @@
 package ua.room414.facade;
 
-import ua.room414.domain.Event;
 import ua.room414.facade.dto.EventDto;
 import ua.room414.facade.dto.EventList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 /**
  * @author Alexander Melashchenko

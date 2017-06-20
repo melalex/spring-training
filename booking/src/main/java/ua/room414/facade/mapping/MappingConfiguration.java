@@ -5,12 +5,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ua.room414.domain.Auditorium;
-import ua.room414.facade.dto.EventDto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 /**
  * @author Alexander Melashchenko
@@ -18,24 +15,11 @@ import java.util.Map;
  */
 @Configuration
 public class MappingConfiguration {
-    private Converter<Map<LocalDateTime, Auditorium>, EventDto.AdaptedMap> auditoriumsConverter;
-    private Converter<EventDto.AdaptedMap, Map<LocalDateTime, Auditorium>> auditoriumsReverseConverter;
-
     private Converter<LocalDateTime, String> localDateTimeConverter;
     private Converter<String, LocalDateTime> localDateTimeReverseConverter;
 
     private Converter<LocalDate, String> localDateConverter;
     private Converter<String, LocalDate> localDateReverseConverter;
-
-    @Autowired
-    public void setAuditoriumsConverter(Converter<Map<LocalDateTime, Auditorium>, EventDto.AdaptedMap> auditoriumsConverter) {
-        this.auditoriumsConverter = auditoriumsConverter;
-    }
-
-    @Autowired
-    public void setAuditoriumsReverseConverter(Converter<EventDto.AdaptedMap, Map<LocalDateTime, Auditorium>> auditoriumsReverseConverter) {
-        this.auditoriumsReverseConverter = auditoriumsReverseConverter;
-    }
 
     @Autowired
     public void setLocalDateTimeConverter(Converter<LocalDateTime, String> localDateTimeConverter) {
@@ -61,8 +45,6 @@ public class MappingConfiguration {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        modelMapper.addConverter(auditoriumsConverter);
-        modelMapper.addConverter(auditoriumsReverseConverter);
         modelMapper.addConverter(localDateTimeConverter);
         modelMapper.addConverter(localDateTimeReverseConverter);
         modelMapper.addConverter(localDateConverter);

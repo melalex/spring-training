@@ -1,5 +1,7 @@
 package ua.room414.util;
 
+import org.aspectj.lang.annotation.Aspect;
+
 /**
  * Every time the bookTicket method is executed perform the checkLucky method for
  * the user that based on some randomness will return true or false. If user is lucky,
@@ -10,5 +12,6 @@ package ua.room414.util;
  * @author Alexander Melashchenko
  * @version 1.0 20 Jun 2017
  */
+@Aspect
 public class LuckyWinnerAspect {
 }

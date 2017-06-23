@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.room414</groupId>
@@ -46,6 +48,10 @@
         <!-- Lombok -->
         <lombok.version>1.16.16</lombok.version>
         <!--<lombok.plugin.version>1.16.16.0</lombok.plugin.version>-->
+
+        <!-- Thymeleaf -->
+        <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
+        <thymeleaf.layout.version>2.0.4</thymeleaf.layout.version>
 
         <!-- Other -->
         <guava.version>22.0</guava.version>
@@ -167,11 +173,6 @@
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
-            <artifactId>jquery-ui</artifactId>
-            <version>${webjars-jquery-ui.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>${webjars-bootstrap.version}</version>
         </dependency>
@@ -182,6 +183,23 @@
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>${thymeleaf.layout.version}</version>
         </dependency>
 
         <!-- Other -->
@@ -242,7 +260,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>3.1.0</version>
+                <configuration>
+                    <warSourceExcludes>static/js/*.*,**/*.scss</warSourceExcludes>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>WEB-INF/web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+
             </plugin>
 
             <plugin>
@@ -259,22 +290,17 @@
                 </executions>
                 <configuration>
                     <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-                    <cssDestinationFolder>${project.build.directory}/${project.name}/resources/css</cssDestinationFolder>
-                    <jsDestinationFolder>${project.build.directory}/${project.name}/resources/js</jsDestinationFolder>
+                    <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/static/css</cssDestinationFolder>
+                    <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/static/js</jsDestinationFolder>
                     <wroFile>${basedir}/src/main/resources/META-INF/wro/wro.xml</wroFile>
                     <extraConfigFile>${basedir}/src/main/resources/META-INF/wro/wro.properties</extraConfigFile>
-                    <contextFolder>${basedir}/src/main/webapp/resources/themes/default/sass</contextFolder>
+                    <contextFolder>${basedir}/src/main/webapp</contextFolder>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>jquery</artifactId>
                         <version>${webjars-jquery.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>jquery-ui</artifactId>
-                        <version>${webjars-jquery-ui.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>

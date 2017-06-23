@@ -5,11 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="classpath:META-INF/db/hibernate.properties">
+          p:location="classpath:META-INF/datasource/hibernate.properties">
         <property name="locations">
             <list>
-                <value>classpath:META-INF/db/hibernate.properties</value>
-                <value>classpath:META-INF/db/mysql/database.properties</value>
+                <value>classpath:META-INF/datasource/hibernate.properties</value>
+                <value>classpath:META-INF/datasource/mysql/database.properties</value>
             </list>
         </property>
     </bean>

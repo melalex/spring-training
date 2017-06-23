@@ -1,4 +1,4 @@
-package ua.room414.anotation;
+package ua.room414.anotations;
 
 import org.springframework.stereotype.Component;
 

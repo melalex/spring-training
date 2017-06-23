@@ -1,7 +1,6 @@
 package ua.room414.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,51 +10,25 @@ import java.util.Set;
  * @author Alexander Melashchenko
  * @version 1.0 01 Jun 2017
  */
+@Data
+@NoArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
+@Table(name = "auditorium")
 public class Auditorium implements Serializable {
     private static final long serialVersionUID = 8913787890825421432L;
 
-    private long id;
-    private String name;
-    private long numberOfSeats;
-    private Set<Integer> vipSeats;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    private long id;
 
     @Column(unique = true)
-    public String getName() {
-        return name;
-    }
+    private String name;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getNumberOfSeats() {
-        return numberOfSeats;
-    }
-
-    public void setNumberOfSeats(long numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
+    @Column(name = "number_of_seats")
+    private long numberOfSeats;
 
     @ElementCollection
     @CollectionTable(name = "vip_seats", joinColumns = @JoinColumn(name = "auditorium_id"))
-    public Set<Integer> getVipSeats() {
-        return vipSeats;
-    }
+    private Set<Integer> vipSeats;
 
-    public void setVipSeats(Set<Integer> vipSeats) {
-        this.vipSeats = vipSeats;
-    }
 }

@@ -3,18 +3,14 @@ package ua.room414.facade.impl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.room414.anotation.Facade;
+import ua.room414.anotations.Facade;
 import ua.room414.domain.Auditorium;
-import ua.room414.domain.User;
 import ua.room414.facade.AuditoriumFacade;
 import ua.room414.facade.dto.AuditoriumDto;
 import ua.room414.facade.dto.AuditoriumList;
-import ua.room414.facade.dto.UserDto;
-import ua.room414.facade.dto.UserList;
 import ua.room414.service.AuditoriumService;
 
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Set;
 
 /**

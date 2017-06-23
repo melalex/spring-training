@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,9 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @XmlRootElement
-public class EventList {
+public class EventList implements Serializable {
+    private static final long serialVersionUID = -7834653340894497410L;
+
     private List<EventDto> events;
 
     public static EventList of(Iterable<EventDto> auditoriums) {

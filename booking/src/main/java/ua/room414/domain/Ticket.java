@@ -1,8 +1,7 @@
 package ua.room414.domain;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -12,62 +11,28 @@ import java.io.Serializable;
  * @author Alexander Melashchenko
  * @version 1.0 01 Jun 2017
  */
+@Data
+@NoArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
+@Table(name = "ticket")
 public class Ticket implements Serializable {
     private static final long serialVersionUID = 5417639527858057871L;
 
-    private long id;
-    private User user;
-    private Event event;
-    private DateTime dateTime;
-    private long seat;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_id")
-    public Event getEvent() {
-        return event;
-    }
+    private Event event;
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
+    @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
-    public DateTime getDateTime() {
-        return dateTime;
-    }
+    private DateTime dateTime;
 
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public long getSeat() {
-        return seat;
-    }
-
-    public void setSeat(long seat) {
-        this.seat = seat;
-    }
+    private long seat;
 }

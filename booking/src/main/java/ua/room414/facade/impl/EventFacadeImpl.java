@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.room414.anotation.Facade;
+import ua.room414.anotations.Facade;
 import ua.room414.domain.Event;
 import ua.room414.facade.EventFacade;
 import ua.room414.facade.dto.EventDto;

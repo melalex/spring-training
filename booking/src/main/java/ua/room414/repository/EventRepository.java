@@ -1,11 +1,9 @@
 package ua.room414.repository;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 import org.springframework.data.repository.CrudRepository;
 import ua.room414.domain.Event;
 
-import java.util.List;
 import java.util.Set;
 
 /**

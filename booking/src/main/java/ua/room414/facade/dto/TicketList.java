@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,9 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @XmlRootElement
-public class TicketList {
+public class TicketList implements Serializable {
+    private static final long serialVersionUID = -5901012937995125447L;
+
     private List<TicketDto> tickets;
 
     public static TicketList of(Iterable<TicketDto> auditoriums) {

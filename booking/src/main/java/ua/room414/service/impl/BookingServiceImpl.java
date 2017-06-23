@@ -26,12 +26,12 @@ public class BookingServiceImpl implements BookingService {
     private DiscountService discountService;
 
     @Autowired
-    public void setTicketRepository(TicketRepository ticketRepository) {
+    public void setTicketRepository(final TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
 
     @Autowired
-    public void setDiscountService(DiscountService discountService) {
+    public void setDiscountService(final DiscountService discountService) {
         this.discountService = discountService;
     }
 
@@ -60,13 +60,28 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void bookTickets(Set<Ticket> tickets) {
-        ticketRepository.save(tickets);
+    @Transactional()
+    public void bookTickets(final Set<Ticket> tickets) {
+        if (isNotReserved(tickets)) {
+            ticketRepository.save(tickets);
+        } else {
+
+        }
     }
 
     @Override
     @Transactional(readOnly = true)
     public Set<Ticket> getPurchasedTicketsForEvent(final Event event, final DateTime dateTime) {
         return Sets.newHashSet(ticketRepository.findAllByEventAndDateTime(event, dateTime));
+    }
+
+    private boolean isNotReserved(final Set<Ticket> tickets) {
+        return tickets.stream().noneMatch(this::isNotReserved);
+    }
+
+    private boolean isNotReserved(final Ticket ticket) {
+        final Set<Ticket> tickets = getPurchasedTicketsForEvent(ticket.getEvent(), ticket.getDateTime());
+
+        return tickets.stream().noneMatch(t -> t.getSeat() == ticket.getSeat());
     }
 }

@@ -3,7 +3,7 @@ package ua.room414.facade.impl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.room414.anotation.Facade;
+import ua.room414.anotations.Facade;
 import ua.room414.domain.User;
 import ua.room414.facade.UserFacade;
 import ua.room414.facade.dto.UserDto;
@@ -11,7 +11,6 @@ import ua.room414.facade.dto.UserList;
 import ua.room414.service.UserService;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 /**
  * @author Alexander Melashchenko

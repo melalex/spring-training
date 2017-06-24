@@ -17,7 +17,7 @@ import ua.room414.user.*;
  */
 @Endpoint
 public class UserEndpoint {
-    private static final String NAMESPACE_URI = "http://ws/namespace/service/user";
+    private static final String NAMESPACE_URI = "http://ua/room414/user";
 
     private UserFacade userFacade;
     private ObjectFactory userObjectFactory = new ObjectFactory();

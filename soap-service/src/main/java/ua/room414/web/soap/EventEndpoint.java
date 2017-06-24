@@ -17,7 +17,7 @@ import ua.room414.response.ResponseType;
  */
 @Endpoint
 public class EventEndpoint {
-    private static final String NAMESPACE_URI = "http://ws/namespace/service/event";
+    private static final String NAMESPACE_URI = "http://ua/room414/event";
 
     private EventFacade eventFacade;
     private ObjectFactory eventObjectFactory = new ObjectFactory();
